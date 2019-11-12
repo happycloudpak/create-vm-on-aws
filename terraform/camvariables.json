@@ -151,7 +151,7 @@
       "label": "Public SSH Key Name",
       "description": "Name of the public SSH key used to connect to the virtual guest",
       "type": "string",
-      "default": "",
+      "default": "sshkey",
       "validation": "",
       "group_name": "Other",
       "required": true,

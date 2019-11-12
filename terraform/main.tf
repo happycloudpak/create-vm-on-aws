@@ -58,6 +58,7 @@ data "aws_subnet" "selected" {
 
 variable "public_ssh_key_name" {
   description = "Name of the public SSH key used to connect to the virtual guest"
+  default = "sshkey"
 }
 
 variable "public_ssh_key" {
