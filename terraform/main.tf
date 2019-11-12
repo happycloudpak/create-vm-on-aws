@@ -27,17 +27,17 @@ variable "aws_region" {
 
 variable "vpc_name_tag" {
   description = "Name of the Virtual Private Cloud (VPC) this resource is going to be deployed into"
-  default = "vpc-happycloudpak"
+  default = ""
 }
 
 variable "subnet_name" {
   description = "Subnet Name"
-  default = "subnet-happycloudpak"
+  default = ""
 }
 
 variable "aws_image_size" {
   description = "AWS Image Instance Size"
-  default     = "t2.small"
+  default     = "t2.micro"
 }
 
 data "aws_vpc" "selected" {
