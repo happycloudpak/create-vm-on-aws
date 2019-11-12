@@ -1,22 +1,169 @@
 {
-  "description": "Created 11/12/19 by admin.",
+  "terraform_engine": "~> 0.11.0",
   "input_datatypes": [ ],
   "input_namespaces": [ ],
   "output_namespace": "",
-  "input_groups": [  {
-    "name": "Globals",
-    "label": "Globals"
-  } ],
+  "input_groups": [
+    {
+      "name": "Networking",
+      "label": "Networking"
+    },
+    {
+      "name": "Instances",
+      "label": "Instances"
+    },
+    {
+      "name": "Other",
+      "label": "Other"
+    },
+    {
+      "name": "Unused",
+      "label": "Unused"
+    }
+  ],
   "output_groups": [ ],
   "template_input_params": [
     {
       "name": "aws_region",
-      "label": "Aws Region",
-      "description": "AWS region to launch servers",
+      "label": "AWS Region Name",
+      "description": "AWS region to launch servers.",
       "type": "string",
-      "default": "us-east-1",
+      "default": "ap-northeast-2",
       "validation": "",
-      "group_name": "Globals",
+      "group_name": "Other",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false,
+      "options": [
+        {
+          "value": "us-east-1",
+          "label": "US East (N. Virginia)",
+          "default": true
+        },
+        {
+          "value": "us-east-2",
+          "label": "US East (Ohio)"
+        },
+        {
+          "value": "us-west-1",
+          "label": "US West (N. California)"
+        },
+        {
+          "value": "us-west-2",
+          "label": "US West (Oregon)"
+        },
+        {
+          "value": "us-gov-west-1",
+          "label": "US GovCloud Region"
+        },
+        {
+          "value": "ca-central-1",
+          "label": "Canada (Central)"
+        },
+        {
+          "value": "eu-west-1",
+          "label": "EU (Ireland)"
+        },
+        {
+          "value": "eu-central-1",
+          "label": "EU (Frankfurt)"
+        },
+        {
+          "value": "eu-west-2",
+          "label": "EU (London)"
+        },
+        {
+          "value": "ap-northeast-1",
+          "label": "Asia Pacific (Tokyo)"
+        },
+        {
+          "value": "ap-northeast-2",
+          "label": "Asia Pacific (Seoul)"
+        },
+        {
+          "value": "ap-southeast-1",
+          "label": "Asia Pacific (Singapore)"
+        },
+        {
+          "value": "ap-southeast-2",
+          "label": "Asia Pacific (Sydney)"
+        },
+        {
+          "value": "ap-south-1",
+          "label": "Asia Pacific (Mumbai)"
+        },
+        {
+          "value": "sa-east-1",
+          "label": "South America (São Paulo)"
+        }
+      ]
+    },
+    {
+      "name": "vpc_name_tag",
+      "label": "Virtual Private Cloud",
+      "description": "Name of the Virtual Private Cloud (VPC) this resource is going to be deployed into",
+      "type": "string",
+      "default": "vpc-973ff6fc",
+      "validation": "",
+      "group_name": "Networking",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "subnet_name",
+      "label": "Subnet Name",
+      "description": "Subnet Name",
+      "type": "string",
+      "default": "subnet-1d7e5051",
+      "validation": "",
+      "group_name": "Networking",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "aws_image_size",
+      "label": "AWS Image Instance Size",
+      "description": "AWS Image Instance Size",
+      "type": "string",
+      "default": "t2.small",
+      "validation": "",
+      "group_name": "Instances",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "public_ssh_key_name",
+      "label": "Public SSH Key Name",
+      "description": "Name of the public SSH key used to connect to the virtual guest",
+      "type": "string",
+      "default": "",
+      "validation": "",
+      "group_name": "Other",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "public_ssh_key",
+      "label": "Public SSH Key",
+      "description": "Public SSH key used to connect to the virtual guest",
+      "type": "string",
+      "default": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDH+Z1xF3RG7xgxX8pATI0VmYPI5uEb5aAHnEm0POe6jtUcYZRWm5L88WX53UeQsNknkbt1LSn6vGaUEVYicd0Rr8NYY5mLD1T14wVi4H1bKOyJggR5D46gzXZcggGRvkAE9iz/ldCZvMqSF/YBDPQ01JS/zObizJ0xgJWwV4mAghrcrS8N5qmQMtBsQoecoGOmE6pAXUpLcPAQQe/XSFswA31xMgeBclnX24614iQ4WNjuuBnycgF2k+BhkLhJZcfEW5jTDbcFuxhoI74YkNSiOk8xuIngTOfCAkFw/S3YpCTxxwkAhkaEgnWRfLtvowveyP7hovhBc1ku36lEQvGN root@nfs",
+      "validation": "",
+      "group_name": "Other",
       "required": true,
       "secured": false,
       "hidden": false,
@@ -25,12 +172,12 @@
     },
     {
       "name": "aws_image",
-      "label": "Aws Image",
+      "label": "Operating System ID",
       "description": "Operating system image id / template that should be used when creating the virtual image",
       "type": "string",
-      "default": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*",
+      "default": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*",
       "validation": "",
-      "group_name": "",
+      "group_name": "Other",
       "required": true,
       "secured": false,
       "hidden": false,
@@ -39,194 +186,12 @@
     },
     {
       "name": "aws_ami_owner_id",
-      "label": "Aws Ami Owner Id",
+      "label": "AWS AMI Owner ID",
       "description": "AWS AMI Owner ID",
       "type": "string",
       "default": "099720109477",
       "validation": "",
-      "group_name": "",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "php_instance_name",
-      "label": "Php Instance Name",
-      "description": "The hostname of server with php",
-      "type": "string",
-      "default": "lampPhp",
-      "validation": "",
-      "group_name": "",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "db_instance_name",
-      "label": "Db Instance Name",
-      "description": "The hostname of server with mysql",
-      "type": "string",
-      "default": "lampDb",
-      "validation": "",
-      "group_name": "",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "network_name_prefix",
-      "label": "Network Name Prefix",
-      "description": "The prefix of names for VPC, Gateway, Subnet and Security Group",
-      "type": "string",
-      "default": "opencontent-lamp",
-      "validation": "",
-      "group_name": "Globals",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "public_key_name",
-      "label": "Public Key Name",
-      "description": "Name of the public SSH key used to connect to the servers",
-      "type": "string",
-      "default": "cam-public-key-lamp",
-      "validation": "",
-      "group_name": "",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "public_key",
-      "label": "Public Key",
-      "description": "Public SSH key used to connect to the servers",
-      "type": "string",
-      "default": "",
-      "validation": "",
-      "group_name": "Globals",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "cam_user",
-      "label": "Cam User",
-      "description": "User to be added into db and sshed into servers",
-      "type": "string",
-      "default": "camuser",
-      "validation": "",
-      "group_name": "",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "cam_pwd",
-      "label": "Cam Pwd",
-      "description": "Password for cam user (minimal length is 8)",
-      "type": "string",
-      "default": "",
-      "validation": "",
-      "group_name": "",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "bastion_host",
-      "label": "Bastion Host",
-      "description": null,
-      "type": "string",
-      "default": "",
-      "validation": "",
-      "group_name": "",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "bastion_user",
-      "label": "Bastion User",
-      "description": null,
-      "type": "string",
-      "default": "",
-      "validation": "",
-      "group_name": "",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "bastion_private_key",
-      "label": "Bastion Private Key",
-      "description": null,
-      "type": "string",
-      "default": "",
-      "validation": "",
-      "group_name": "",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "bastion_port",
-      "label": "Bastion Port",
-      "description": null,
-      "type": "string",
-      "default": "",
-      "validation": "",
-      "group_name": "",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "bastion_host_key",
-      "label": "Bastion Host Key",
-      "description": null,
-      "type": "string",
-      "default": "",
-      "validation": "",
-      "group_name": "",
-      "required": true,
-      "secured": false,
-      "hidden": false,
-      "immutable": false,
-      "immutable_after_create": false
-    },
-    {
-      "name": "bastion_password",
-      "label": "Bastion Password",
-      "description": null,
-      "type": "string",
-      "default": "",
-      "validation": "",
-      "group_name": "",
+      "group_name": "Other",
       "required": true,
       "secured": false,
       "hidden": false,
@@ -234,26 +199,5 @@
       "immutable_after_create": false
     }
   ],
-  "template_output_params": [
-    {
-      "name": "aws_php_address",
-      "label": "Aws Php Address",
-      "description": "null",
-      "group_name": "",
-      "secured": false,
-      "hidden": false,
-      "shortname": "",
-      "type": "string"
-    },
-    {
-      "name": "mysql_address",
-      "label": "Mysql Address",
-      "description": "null",
-      "group_name": "",
-      "secured": false,
-      "hidden": false,
-      "shortname": "",
-      "type": "string"
-    }
-  ]
+  "template_output_params": [ ]
 }
