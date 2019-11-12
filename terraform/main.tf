@@ -27,12 +27,12 @@ variable "aws_region" {
 
 variable "vpc_name_tag" {
   description = "Name of the Virtual Private Cloud (VPC) this resource is going to be deployed into"
-  default = "vpc-973ff6fc"
+  default = "vpc-happycloudpak"
 }
 
 variable "subnet_name" {
   description = "Subnet Name"
-  default = "subnet-1d7e5051"
+  default = "subnet-happycloudpak"
 }
 
 variable "aws_image_size" {
@@ -101,3 +101,4 @@ resource "aws_instance" "orpheus_ubuntu_micro" {
   key_name      = "${aws_key_pair.orpheus_public_key.id}"
   tags          = "${module.camtags.tagsmap}"
 }
+
